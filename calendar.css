@@ -67,6 +67,12 @@ main {
 .row > .even.right {
   color: var(--even-weekend);
 }
+.row .today {
+  outline: 1px dashed currentColor;
+  outline-offset: 4px;
+  border-radius: 1em;
+  /* color: yellow; */
+}
 
 .week {
   /* max-width: 400px; */

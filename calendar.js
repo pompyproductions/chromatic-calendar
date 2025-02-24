@@ -79,7 +79,7 @@ function monthToStr(monthIndex) {
   ][monthIndex]
 }
 
-function createRow(week) {
+function createRow(week, checkForToday=false) {
 
   const rowElem = document.createElement("div");
   rowElem.classList.add("row");
@@ -103,7 +103,14 @@ function createRow(week) {
       dayElem.classList.add("weekend");
     }
     dayElem.textContent = day.getDate().toString().padStart(2, "0");
-    weekElem.append(dayElem)
+
+    if (checkForToday) {
+      console.log(`monday: ${day.toDateString()}. today: ${new Date().toDateString()}`);
+      if (day.toDateString() == new Date().toDateString()) {
+        dayElem.classList.add("today")
+      }
+    }
+    weekElem.append(dayElem);
   }
   if (week.isLastWeek && week.isFirstWeek) {
     const leftElem = document.createElement("p");
@@ -135,6 +142,6 @@ const today = new Date();
 for (let i = -5; i <= 5; i++) {
   const day = new Date(today);
   day.setDate(day.getDate() + i * 7);
-  const row = createRow(new Week(day));
+  const row = createRow(new Week(day), i ? false : true);
   weeksContainer.append(row)
 }
