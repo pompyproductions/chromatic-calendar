@@ -1,0 +1,92 @@
+body {
+  --fg: #190021;
+  --bg: #c2c2c2;
+  --even-weekday: rgb(40, 40, 138);
+  --even-weekend: rgb(40, 40, 138);
+  --odd-weekday: rgb(30, 30, 43);
+  --odd-weekend: rgb(30, 30, 43);
+}
+
+body.dark {
+  --bg: rgb(12, 12, 12);
+  --fg: rgb(242, 242, 242);
+  --even-weekday: rgb(237, 91, 91);
+  --even-weekend: rgb(105, 32, 32);
+  --odd-weekday: rgb(245, 245, 245);
+  --odd-weekend: rgb(210, 210, 210);
+}
+
+
+body {
+  display: flex;
+  background-color: var(--bg);
+  color: var(--fg);
+  height: 100vh;
+  font-family: Azeret Mono;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 2rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-areas: "left week right";
+  gap: 2rem;
+}
+.row > .left {
+  grid-area: left
+}
+.row > .right {
+  grid-area: right
+}
+.row > .week {
+  grid-area: week
+}
+/* .row > .week > .weekend {
+  outline: 1px solid rgba(0, 0, 0, 0.24);
+  outline-offset: 2px;
+} */
+
+.row .odd {
+  color: var(--odd-weekday);
+}
+.row .odd.weekend,
+.row > .odd.right {
+  color: var(--odd-weekend);
+}
+.row .even {
+  color: var(--even-weekday);
+}
+.row .even.weekend,
+.row > .even.right {
+  color: var(--even-weekend);
+}
+
+.week {
+  /* max-width: 400px; */
+  /* background-color: aquamarine; */
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.week > li {
+  /* width: 1rem; */
+  /* background-color: pink; */
+  text-align: center;
+}
+
+
+
+
+aside {
+  display: none;
+  /* flex-grow: 2;
+  background-color: antiquewhite; */
+}
