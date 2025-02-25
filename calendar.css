@@ -1,3 +1,6 @@
+/* --- */
+/* theme */
+
 body {
   --fg: #190021;
   --bg: #c2c2c2;
@@ -14,8 +17,12 @@ body.dark {
   --even-weekend: rgb(105, 32, 32);
   --odd-weekday: rgb(245, 245, 245);
   --odd-weekend: rgb(210, 210, 210);
+  --highlight-weekday: rgb(72, 214, 181);
+  --highlight-weekend: rgb(55, 128, 111);
 }
 
+/* --- */
+/* general */
 
 body {
   display: flex;
@@ -33,6 +40,19 @@ main {
   padding: 2rem;
 }
 
+/* --- */
+/* calendar layout */
+
+.week {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.week > li {
+  text-align: center;
+}
+
 .row {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
@@ -48,10 +68,9 @@ main {
 .row > .week {
   grid-area: week
 }
-/* .row > .week > .weekend {
-  outline: 1px solid rgba(0, 0, 0, 0.24);
-  outline-offset: 2px;
-} */
+
+/* --- */
+/* calendar colors */
 
 .row .odd {
   color: var(--odd-weekday);
@@ -67,11 +86,26 @@ main {
 .row > .even.right {
   color: var(--even-weekend);
 }
-.row .today {
+.row .highlight, 
+.row > .highlight.right {
+  color: var(--highlight-weekday);
+}
+
+.row .highlight.weekend,
+.row > .highlight.right {
+  color: var(--highlight-weekend)
+}
+
+/* --- */
+/* calendar outlines */
+
+.row .today, .row .highlight {
   outline: 1px solid currentColor;
   outline-offset: 4px;
-  border-radius: 1em;
   /* color: yellow; */
+}
+.row .today {
+  border-radius: 1em;
 }
 .row li:hover {
   outline: 1px dashed currentColor;
@@ -81,25 +115,9 @@ main {
   user-select: none;
 }
 
-.week {
-  /* max-width: 400px; */
-  /* background-color: aquamarine; */
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.week > li {
-  /* width: 1rem; */
-  /* background-color: pink; */
-  text-align: center;
-}
-
-
-
+/* --- */
+/* sidebar */
 
 aside {
   display: none;
-  /* flex-grow: 2;
-  background-color: antiquewhite; */
 }

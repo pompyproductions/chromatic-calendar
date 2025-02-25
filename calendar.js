@@ -45,7 +45,6 @@ class Week {
     this.months = months;
     this.isLastWeek = isLastWeek;
     this.isFirstWeek = isFirstWeek;
-
   }
 }
 
@@ -79,6 +78,10 @@ function monthToStr(monthIndex) {
 }
 
 function createRow(week, distance) {
+  // creates:
+  // div.row > ol.week > li.odd|even.today.weekend|weekday*7
+  //         > p.right.odd|even
+  //         > p.left.odd|even
 
   const rowElem = document.createElement("div");
   rowElem.classList.add("row");
@@ -164,6 +167,8 @@ const handleDayClick = (e) => {
 weeksContainer.addEventListener("click", handleDayClick)
 
 
+// ---
+// setup
 
 const today = new Date();
 for (let i = -5; i <= 50; i++) {
