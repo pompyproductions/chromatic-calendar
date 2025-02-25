@@ -2,7 +2,6 @@ const weeksContainer = document.getElementById("weeks-container")
 
 class Week {
   constructor(date) {
-
     // get weekdays
     const monday = new Date(date);
     monday.setDate(monday.getDate() - monday.getDay() + 1) // +1 because sunday is 0
@@ -79,11 +78,11 @@ function monthToStr(monthIndex) {
   ][monthIndex]
 }
 
-function createRow(week, checkForToday=false) {
+function createRow(week, distance) {
 
   const rowElem = document.createElement("div");
   rowElem.classList.add("row");
-  rowElem.setAttribute("data-week", 0);
+  rowElem.setAttribute("data-week", distance);
   
   const weekElem = document.createElement("ol");
   weekElem.classList.add("week");
@@ -104,8 +103,7 @@ function createRow(week, checkForToday=false) {
     }
     dayElem.textContent = day.getDate().toString().padStart(2, "0");
 
-    if (checkForToday) {
-      console.log(`monday: ${day.toDateString()}. today: ${new Date().toDateString()}`);
+    if (!distance) {
       if (day.toDateString() == new Date().toDateString()) {
         dayElem.classList.add("today")
       }
@@ -129,19 +127,50 @@ function createRow(week, checkForToday=false) {
     } else {
       rightElem.classList.add("odd");
     }
-    rightElem.classList.add("right");
-    
+    rightElem.classList.add("right"); 
     rowElem.append(leftElem);
     rowElem.append(rightElem);
   }
-
   return rowElem;
 }
 
+// ---
+// event handlers
+
+const handleDayClick = (e) => {
+  if (e.target.matches(".row li")) {
+    const day = [...e.target.closest(".week").children].indexOf(e.target);
+    const weekDistance = e.target.closest(".row").getAttribute("data-week");
+
+    const today = new Date();
+    const clickedDate = new Date();
+    const dayDistance = (day - today.getDay()) + (weekDistance * 7) + 1
+    clickedDate.setDate(
+      today.getDate() + dayDistance
+    )
+
+    let message = `Date clicked: ${clickedDate.toDateString()}.`
+    if (dayDistance < 0) {
+      message += ` ${Math.abs(dayDistance)} day${dayDistance + 1 ? "s" : ""} ago.`
+    } else if (dayDistance > 0) {
+      message += ` ${dayDistance} day${dayDistance - 1 ? "s" : ""} from now.`
+    } else {
+      message += " It's today."
+    }
+    console.log(message)
+  }
+}
+
+weeksContainer.addEventListener("click", handleDayClick)
+
+
+
 const today = new Date();
-for (let i = -5; i <= 5; i++) {
+for (let i = -5; i <= 50; i++) {
   const day = new Date(today);
   day.setDate(day.getDate() + i * 7);
-  const row = createRow(new Week(day), i ? false : true);
+  const row = createRow(new Week(day), i);
   weeksContainer.append(row)
 }
+
+

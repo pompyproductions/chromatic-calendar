@@ -68,10 +68,17 @@ main {
   color: var(--even-weekend);
 }
 .row .today {
-  outline: 1px dashed currentColor;
+  outline: 1px solid currentColor;
   outline-offset: 4px;
   border-radius: 1em;
   /* color: yellow; */
+}
+.row li:hover {
+  outline: 1px dashed currentColor;
+  outline-offset: 4px;
+  border-radius: 1em;
+  cursor: pointer;
+  user-select: none;
 }
 
 .week {
