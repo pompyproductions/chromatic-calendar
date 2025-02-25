@@ -175,10 +175,16 @@ const handleHideSidebar = (e) => {
     alert("Hide sidebar right under development.")
   }
 }
+const handleShowSidebar = (e) => {
+  if (e.target.id === "sidebar-left") {
+    e.target.classList.remove("hidden");
+  }
+}
 
 weeksContainer.addEventListener("click", handleDayClick);
 document.getElementById("button-change-theme").addEventListener("click", handleChangeTheme);
 document.getElementById("button-hide-sidebar-left").addEventListener("click", handleHideSidebar);
+document.getElementById("sidebar-left").addEventListener("click", handleShowSidebar)
 
 
 // ---
