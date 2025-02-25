@@ -43,30 +43,30 @@ main {
 /* --- */
 /* calendar layout */
 
-.week {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.week > li {
-  text-align: center;
-}
-
 .row {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
   grid-template-areas: "left week right";
   gap: 2rem;
 }
+
 .row > .left {
   grid-area: left
 }
+
 .row > .right {
   grid-area: right
 }
+
 .row > .week {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
   grid-area: week
+}
+
+.row > .week > li {
+  text-align: center;
 }
 
 /* --- */
@@ -75,17 +75,21 @@ main {
 .row .odd {
   color: var(--odd-weekday);
 }
+
 .row .odd.weekend,
 .row > .odd.right {
   color: var(--odd-weekend);
 }
+
 .row .even {
   color: var(--even-weekday);
 }
+
 .row .even.weekend,
 .row > .even.right {
   color: var(--even-weekend);
 }
+
 .row .highlight, 
 .row > .highlight.right {
   color: var(--highlight-weekday);
@@ -102,11 +106,12 @@ main {
 .row .today, .row .highlight {
   outline: 1px solid currentColor;
   outline-offset: 4px;
-  /* color: yellow; */
 }
+
 .row .today {
   border-radius: 1em;
 }
+
 .row li:hover {
   outline: 1px dashed currentColor;
   outline-offset: 4px;
