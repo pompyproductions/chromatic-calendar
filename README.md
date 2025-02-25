@@ -19,9 +19,7 @@ However, the majority of these calendars divide the display into months, resulti
 distance = (weekB - weekA) * 7 + (dayB - dayA)
 ```
 
-Chromatic Calendar is born out of this simple necessity, intended as a tool to be used, as one would a calculator or an abacus. 
-
-Because I couldn't find a calendar that is:
+Chromatic Calendar is born out of this simple necessity, intended as a tool to be used, as one would a calculator or an abacus. As such, it fills a useful gap amid the plethora of "planner" apps by being:
 - Digital (not print),
 - Continuous (without interruptions between months),
 - Lightweight (just some lines of JS),
