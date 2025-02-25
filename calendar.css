@@ -39,9 +39,9 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1em;
   align-items: center;
-  padding: 2rem;
+  padding: 2em;
   overflow: scroll;
 }
 
@@ -52,7 +52,7 @@ main {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
   grid-template-areas: "left week right";
-  gap: 2rem;
+  gap: 2em;
 }
 
 .row > .left {
@@ -66,7 +66,7 @@ main {
 
 .row > .week {
   display: flex;
-  gap: 1rem;
+  gap: 1em;
   justify-content: space-between;
   grid-area: week
 }
@@ -182,8 +182,8 @@ aside.hidden > * {
   flex-direction: column;
   background-color: rgb(205, 53, 53);
   color: var(--odd-weekday);
-  padding: 2rem;
-  gap: 1rem;
+  padding: 2em;
+  gap: 1em;
 }
 
 #sidebar-right {
@@ -228,4 +228,13 @@ button.flat:hover {
 }
 button.flat:active {
   transform: translateY(0px);
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    font-size: 0.8rem;
+  }
+  aside {
+    display: none !important;
+  }
 }
