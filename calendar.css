@@ -2,21 +2,23 @@
 /* theme */
 
 body {
-  --fg: #190021;
-  --bg: #c2c2c2;
-  --even-weekday: rgb(40, 40, 138);
-  --even-weekend: rgb(40, 40, 138);
-  --odd-weekday: rgb(30, 30, 43);
-  --odd-weekend: rgb(30, 30, 43);
+  --fg: hsl(0, 0%, 0%);
+  --bg: hsl(0, 0%, 100%);
+  --even-weekday: hsl(180, 40%, 45%);
+  --even-weekend: hsl(180, 45%, 65%);
+  --odd-weekday: hsl(0, 0%, 15%);
+  --odd-weekend: hsl(0, 0%, 60%);
+  --highlight-weekday: hsl(0, 90%, 45%);
+  --highlight-weekend: hsl(0, 70%, 70%);
 }
 
 body.dark {
   --bg: rgb(12, 12, 12);
   --fg: rgb(242, 242, 242);
-  --even-weekday: rgb(237, 91, 91);
-  --even-weekend: rgb(105, 32, 32);
-  --odd-weekday: rgb(245, 245, 245);
-  --odd-weekend: rgb(210, 210, 210);
+  --even-weekday: rgb(70, 104, 204);
+  --even-weekend: rgb(124, 147, 214);
+  --odd-weekday: rgb(0, 0, 0);
+  --odd-weekend: rgb(100, 100, 100);
   --highlight-weekday: rgb(72, 214, 181);
   --highlight-weekend: rgb(55, 128, 111);
 }
@@ -103,7 +105,7 @@ main {
 /* --- */
 /* calendar outlines */
 
-.row .today, .row .highlight {
+.row .today, .row .selected {
   outline: 1px solid currentColor;
   outline-offset: 4px;
 }

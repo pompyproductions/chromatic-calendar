@@ -179,3 +179,9 @@ for (let i = -5; i <= 50; i++) {
 }
 
 
+// for (let i = 1; i < 4; i++) {
+//   const week = document.querySelector(`[data-week="${i}"]`);
+// 	for (let elem of week.querySelectorAll("li")) {
+// 		elem.classList.add("highlight")
+// 	}
+// }
