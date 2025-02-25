@@ -203,7 +203,7 @@ document.getElementById("sidebar-left").addEventListener("click", handleShowSide
 // setup
 
 const today = new Date();
-for (let i = -5; i <= 10; i++) {
+for (let i = -5; i <= 30; i++) {
   const day = new Date(today);
   day.setDate(day.getDate() + i * 7);
   const row = createRow(new Week(day), i);
@@ -211,9 +211,9 @@ for (let i = -5; i <= 10; i++) {
 }
 
 
-for (let i = -1; i < 4; i++) {
-  const week = document.querySelector(`[data-week="${i}"]`);
-	for (let elem of week.querySelectorAll("li")) {
-		elem.classList.add("highlight")
-	}
-}
+// for (let i = -1; i < 4; i++) {
+//   const week = document.querySelector(`[data-week="${i}"]`);
+// 	for (let elem of week.querySelectorAll("li")) {
+// 		elem.classList.add("highlight")
+// 	}
+// }
