@@ -164,7 +164,21 @@ const handleDayClick = (e) => {
   }
 }
 
-weeksContainer.addEventListener("click", handleDayClick)
+const handleChangeTheme = (e) => {
+  document.querySelector("body").classList.toggle("dark");
+}
+const handleHideSidebar = (e) => {
+  if (e.target.id === "button-hide-sidebar-left") {
+    // alert("Hide sidebar left under development.")
+    e.target.closest("aside").classList.add("hidden")
+  } else if (e.target.id === "button-hide-sidebar-right") {
+    alert("Hide sidebar right under development.")
+  }
+}
+
+weeksContainer.addEventListener("click", handleDayClick);
+document.getElementById("button-change-theme").addEventListener("click", handleChangeTheme);
+document.getElementById("button-hide-sidebar-left").addEventListener("click", handleHideSidebar);
 
 
 // ---
