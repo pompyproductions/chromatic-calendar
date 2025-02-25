@@ -133,6 +133,18 @@ function createRow(week, distance) {
     rightElem.classList.add("right"); 
     rowElem.append(leftElem);
     rowElem.append(rightElem);
+  } else if (week.isLastWeek) {
+    const rightElem = document.createElement("p");
+    rightElem.textContent = monthToStr(week.months[0])
+    rightElem.classList.add("right")
+    rightElem.classList.add(week.months[0] % 2 ? "even" : "odd");
+    rowElem.append(rightElem)
+  } else if (week.isFirstWeek) {
+    const leftElem = document.createElement("p");
+    leftElem.textContent = monthToStr(week.months[0])
+    leftElem.classList.add("left")
+    leftElem.classList.add(week.months[0] % 2 ? "even" : "odd");
+    rowElem.append(leftElem); 
   }
   return rowElem;
 }
