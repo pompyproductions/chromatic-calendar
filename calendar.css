@@ -111,11 +111,11 @@ main {
 
 .row .today, .row .selected {
   outline: 1px solid currentColor;
-  outline-offset: 4px;
+  outline-offset: 2px;
 }
 
 .row .today {
-  border-radius: 1em;
+  border-radius: 50%;
 }
 
 .row li:hover {
@@ -125,6 +125,45 @@ main {
   cursor: pointer;
   user-select: none;
 }
+
+/* --- */
+/* calendar selection */
+
+.week .highlight {
+  position: relative;
+}
+
+.week .highlight::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  left: -8px;
+  top: -3px;
+  bottom: -3px;
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+}
+
+.week .highlight:first-of-type:after {
+  border-left: 1px dashed currentColor;
+}
+
+.week .highlight:last-of-type:after {
+  border-right: 1px dashed currentColor;
+}
+
+.week .highlight.selected {
+  outline: none;
+  /* border-right: 1px dashed currentColor; */
+}
+.week .highlight.selected:first-of-type:after {
+  border-left: 1px solid currentColor;
+}
+.week .highlight.selected:last-of-type:after {
+  border-right: 1px solid currentColor;
+}
+
+
 
 /* --- */
 /* sidebar */
