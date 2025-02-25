@@ -56,7 +56,8 @@ main {
 }
 
 .row > .left {
-  grid-area: left
+  grid-area: left;
+  text-align: end;
 }
 
 .row > .right {
