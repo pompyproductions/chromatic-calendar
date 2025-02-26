@@ -212,6 +212,14 @@ function refreshDisplays() {
   }
 
   if (calendarDates.length === 2) {
+    const distance = calendarDates[1].distanceFromToday - calendarDates[0].distanceFromToday + 1;
+    const comparison = document.createElement("section");
+    const comparisonText = document.createElement("p");
+    comparisonText.textContent = `Days selected: ${distance}`;
+    comparison.append(comparisonText);
+    container.append(comparison);
+    
+
     let endReached = false
     let currentDateElem = calendarDates[0].domElem.nextSibling
     let currentRow = currentDateElem.closest(".row")
@@ -233,6 +241,7 @@ function refreshDisplays() {
       // endReached = true;
     }
   }
+  
 }
 
 function removeChildren(elem) {

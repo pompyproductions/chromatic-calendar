@@ -198,16 +198,11 @@ aside.hidden > * {
   flex-grow: 1;
 }
 
-.form-couple {
-
-}
-
 button {
   border: 1px solid var(--odd-weekday);
   background: none;
   padding: 0.5em 1em;
   transition: transform 0.1s;
-
 }
 button:hover {
   transform: translateY(-2px);
@@ -232,6 +227,11 @@ button.flat:hover {
 }
 button.flat:active {
   transform: translateY(0px);
+}
+
+section:nth-of-type(3) {
+  border-top: var(--fg) 1px solid;
+  padding-top: 1em;
 }
 
 @media screen and (max-width: 900px) {
