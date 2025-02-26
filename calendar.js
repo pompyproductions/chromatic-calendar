@@ -4,9 +4,10 @@ const highlightedDates = []
 
 
 class CalendarDate {
-  constructor(date, domElem) {
+  constructor(date, domElem, distanceFromToday) {
     this.date = date;
     this.domElem = domElem;
+    this.distanceFromToday = distanceFromToday
   }
 
   toString() {
@@ -167,18 +168,30 @@ function createRow(week, distance) {
   return rowElem;
 }
 
-function createCalendarDateDisplay(date) {
+function createCalendarDateDisplay(calendarDate) {
   const container = document.createElement("section");
   container.classList.add("picked-date", "container");
 
   const title = document.createElement("h2");
-  title.textContent = date.toDateString();
+  title.textContent = calendarDate.toString();
   const closeButton = document.createElement("button");
   closeButton.classList.add("flat");
   closeButton.textContent = "[Clear]";
   closeButton.addEventListener("click", handleClearSelection);
+  const paragraph = document.createElement("p");
+  let message = "";
+  // console.log(calendarDate.distanceFromToday);
+  if (calendarDate.distanceFromToday < 0) {
+    message = `${Math.abs(calendarDate.distanceFromToday)} day${calendarDate.distanceFromToday + 1 ? "s" : ""} ago.`
+  } else if (calendarDate.distanceFromToday > 0) {
+    message = `${calendarDate.distanceFromToday} day${calendarDate.distanceFromToday - 1 ? "s" : ""} from today.`
+  } else {
+    message = "Today."
+  }
+  paragraph.textContent = message
 
-  container.append(closeButton, title);
+
+  container.append(closeButton, title, paragraph);
   return container
 }
 
@@ -187,7 +200,8 @@ function refreshDisplays() {
   // console.log([...removeChildren(container).children]);
   container.innerHTML = ""
   for (let i = 0; i < calendarDates.length; i++) {
-    container.append(createCalendarDateDisplay(calendarDates[i].date));
+    console.log(calendarDates[i])
+    container.append(createCalendarDateDisplay(calendarDates[i]));
     calendarDates[i].domElem.classList.remove("start", "end");
     if (i === 0) {
       calendarDates[i].domElem.classList.add("start")
@@ -249,7 +263,9 @@ const handleDayClick = (e) => {
     clickedDate.setDate(
       today.getDate() + dayDistance
     )
-    calendarDates.push(new CalendarDate(clickedDate, e.target))
+    calendarDates.push(new CalendarDate(
+      clickedDate, e.target, dayDistance
+    ))
     if (calendarDates.length === 2) {
       calendarDates.sort(
         (dateA, dateB) => dateA.date - dateB.date
