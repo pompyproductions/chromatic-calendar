@@ -1,5 +1,6 @@
 const weeksContainer = document.getElementById("weeks-container")
 const calendarDates = []
+const highlightedDates = []
 
 
 class CalendarDate {
@@ -195,6 +196,29 @@ function refreshDisplays() {
       calendarDates[i].domElem.classList.add("end")
     }
   }
+
+  if (calendarDates.length === 2) {
+    let endReached = false
+    let currentDateElem = calendarDates[0].domElem.nextSibling
+    let currentRow = currentDateElem.closest(".row")
+    // console.log(currentWeek)
+    while (!endReached) {
+      while (currentDateElem) {
+        if (currentDateElem === calendarDates[1].domElem) {
+          endReached = true;
+          break;
+        }
+        currentDateElem.classList.add("highlight");
+        highlightedDates.push(currentDateElem);
+        currentDateElem = currentDateElem.nextSibling;
+      }
+      currentRow = currentRow.nextSibling;
+      currentDateElem = currentRow.querySelector("li");
+      console.log(currentDateElem)
+      // get monday of next week
+      // endReached = true;
+    }
+  }
 }
 
 function removeChildren(elem) {
@@ -265,6 +289,10 @@ const handleShowSidebar = (e) => {
 const handleClearSelection = (e) => {
   const index = [...e.target.closest("aside").children].indexOf(e.target.closest("section"));
   calendarDates.splice(index, 1)[0].domElem.classList.remove("highlight", "selected", "start", "end")
+  for (let date of highlightedDates) {
+    date.classList.remove("highlight");
+  }
+  highlightedDates.empty
   refreshDisplays()
 }
 
