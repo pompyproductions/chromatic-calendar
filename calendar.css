@@ -156,17 +156,12 @@ main {
   outline: none;
   /* border-right: 1px dashed currentColor; */
 }
-.week .highlight.selected:first-of-type:after {
-  border-left: 1px solid currentColor;
-}
-.week .highlight.selected:last-of-type:after {
-  border-right: 1px solid currentColor;
-}
 
 
 
 /* --- */
 /* sidebar */
+
 
 aside.hidden {
   cursor: pointer;
@@ -175,7 +170,6 @@ aside.hidden {
 aside.hidden > * {
   display: none !important;
 }
-
 
 #sidebar-left {
   display: flex;
@@ -187,7 +181,10 @@ aside.hidden > * {
 }
 
 #sidebar-right {
-  display: none;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .vsep {

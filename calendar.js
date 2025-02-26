@@ -1,4 +1,21 @@
 const weeksContainer = document.getElementById("weeks-container")
+const calendarDates = []
+
+
+class CalendarDate {
+  constructor(date, domElem) {
+    this.date = date;
+    this.domElem = domElem;
+  }
+
+  toString() {
+    return `${monthToStr(this.date.getMonth())} ${this.date.getDate()}, ${this.date.getFullYear()}`
+  }
+
+  valueOf() {
+    return +this.date
+  }
+}
 
 class Week {
   constructor(date) {
@@ -24,7 +41,7 @@ class Week {
     let isFirstWeek = false;
     let isLastWeek = false;
     // check if last or first week
-    if (months.length == 2) {
+    if (months.length === 2) {
       isFirstWeek = true;
       isLastWeek = true;
     } else {
@@ -149,10 +166,44 @@ function createRow(week, distance) {
   return rowElem;
 }
 
+function createCalendarDateDisplay(date) {
+  const container = document.createElement("section");
+  container.classList.add("picked-date", "container");
+
+  const title = document.createElement("h2");
+  title.textContent = date.toDateString();
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("flat");
+  closeButton.textContent = "[Clear]";
+  closeButton.addEventListener("click", handleClearSelection);
+
+  container.append(closeButton, title);
+  return container
+}
+
+function refreshDisplays() {
+  const container = document.getElementById("sidebar-right");
+  // console.log([...removeChildren(container).children]);
+  container.innerHTML = ""
+  for (let date of calendarDates) {
+    container.append(createCalendarDateDisplay(date.date));
+    // date.domElem.classList.add("highlight", "selected")
+  }
+}
+
+function removeChildren(elem) {
+  for (let child of elem.children) {
+    // console.log(child);
+    elem.removeChild(child)
+  }
+  return elem
+}
+
 // ---
 // event handlers
 
 const handleDayClick = (e) => {
+  if (calendarDates.length === 2) return;
   if (e.target.matches(".row li")) {
     const day = [...e.target.closest(".week").children].indexOf(e.target);
     const weekDistance = e.target.closest(".row").getAttribute("data-week");
@@ -163,16 +214,24 @@ const handleDayClick = (e) => {
     clickedDate.setDate(
       today.getDate() + dayDistance
     )
-
-    let message = `Date clicked: ${clickedDate.toDateString()}.`
-    if (dayDistance < 0) {
-      message += ` ${Math.abs(dayDistance)} day${dayDistance + 1 ? "s" : ""} ago.`
-    } else if (dayDistance > 0) {
-      message += ` ${dayDistance} day${dayDistance - 1 ? "s" : ""} from now.`
-    } else {
-      message += " It's today."
+    calendarDates.push(new CalendarDate(clickedDate, e.target))
+    if (calendarDates.length === 2) {
+      calendarDates.sort(
+        (dateA, dateB) => dateA.date - dateB.date
+      )
     }
-    console.log(message)
+
+    e.target.classList.add("highlight", "selected")
+    refreshDisplays()
+    // let message = `Date clicked: ${clickedDate.toDateString()}.`
+    // if (dayDistance < 0) {
+    //   message += ` ${Math.abs(dayDistance)} day${dayDistance + 1 ? "s" : ""} ago.`
+    // } else if (dayDistance > 0) {
+    //   message += ` ${dayDistance} day${dayDistance - 1 ? "s" : ""} from now.`
+    // } else {
+    //   message += " It's today."
+    // }
+    // console.log(message)
   }
 }
 
@@ -192,6 +251,11 @@ const handleShowSidebar = (e) => {
     e.target.classList.remove("hidden");
   }
 }
+const handleClearSelection = (e) => {
+  const index = [...e.target.closest("aside").children].indexOf(e.target.closest("section"));
+  calendarDates.splice(index, 1)[0].domElem.classList.remove("highlight", "selected")
+  refreshDisplays()
+}
 
 weeksContainer.addEventListener("click", handleDayClick);
 document.getElementById("button-change-theme").addEventListener("click", handleChangeTheme);
@@ -210,6 +274,7 @@ for (let i = -5; i <= 30; i++) {
   weeksContainer.append(row)
 }
 
+document.querySelector("aside").classList.add("hidden")
 
 // for (let i = -1; i < 4; i++) {
 //   const week = document.querySelector(`[data-week="${i}"]`);
