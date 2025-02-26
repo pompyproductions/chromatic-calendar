@@ -185,9 +185,15 @@ function refreshDisplays() {
   const container = document.getElementById("sidebar-right");
   // console.log([...removeChildren(container).children]);
   container.innerHTML = ""
-  for (let date of calendarDates) {
-    container.append(createCalendarDateDisplay(date.date));
-    // date.domElem.classList.add("highlight", "selected")
+  for (let i = 0; i < calendarDates.length; i++) {
+    container.append(createCalendarDateDisplay(calendarDates[i].date));
+    calendarDates[i].domElem.classList.remove("start", "end");
+    if (i === 0) {
+      calendarDates[i].domElem.classList.add("start")
+    }
+    if (i === calendarDates.length - 1) {
+      calendarDates[i].domElem.classList.add("end")
+    }
   }
 }
 
@@ -258,7 +264,7 @@ const handleShowSidebar = (e) => {
 }
 const handleClearSelection = (e) => {
   const index = [...e.target.closest("aside").children].indexOf(e.target.closest("section"));
-  calendarDates.splice(index, 1)[0].domElem.classList.remove("highlight", "selected")
+  calendarDates.splice(index, 1)[0].domElem.classList.remove("highlight", "selected", "start", "end")
   refreshDisplays()
 }
 

@@ -157,6 +157,13 @@ main {
   /* border-right: 1px dashed currentColor; */
 }
 
+.week .highlight.selected.start::after {
+  border-left: 1px solid currentColor;
+}
+.week .highlight.selected.end::after {
+  border-right: 1px solid currentColor;
+}
+
 
 
 /* --- */
