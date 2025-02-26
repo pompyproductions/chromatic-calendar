@@ -203,8 +203,13 @@ function removeChildren(elem) {
 // event handlers
 
 const handleDayClick = (e) => {
-  if (calendarDates.length === 2) return;
   if (e.target.matches(".row li")) {
+    if (calendarDates.some((value) => value.domElem === e.target)) {
+      console.log("it exists!");
+      return
+    }
+
+    if (calendarDates.length === 2) return;
     const day = [...e.target.closest(".week").children].indexOf(e.target);
     const weekDistance = e.target.closest(".row").getAttribute("data-week");
 
