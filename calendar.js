@@ -301,7 +301,7 @@ const handleClearSelection = (e) => {
   for (let date of highlightedDates) {
     date.classList.remove("highlight");
   }
-  highlightedDates.empty
+  highlightedDates.length = 0;
   refreshDisplays()
 }
 
