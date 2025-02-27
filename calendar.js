@@ -180,7 +180,6 @@ function createCalendarDateDisplay(calendarDate) {
   closeButton.addEventListener("click", handleClearSelection);
   const paragraph = document.createElement("p");
   let message = "";
-  // console.log(calendarDate.distanceFromToday);
   if (calendarDate.distanceFromToday < 0) {
     message = `${Math.abs(calendarDate.distanceFromToday)} day${calendarDate.distanceFromToday + 1 ? "s" : ""} ago.`
   } else if (calendarDate.distanceFromToday > 0) {
@@ -197,7 +196,6 @@ function createCalendarDateDisplay(calendarDate) {
 
 function refreshDisplays() {
   const container = document.getElementById("sidebar-right");
-  // console.log([...removeChildren(container).children]);
   container.innerHTML = ""
   for (let i = 0; i < calendarDates.length; i++) {
     console.log(calendarDates[i])
@@ -223,7 +221,6 @@ function refreshDisplays() {
     let endReached = false
     let currentDateElem = calendarDates[0].domElem.nextSibling
     let currentRow = currentDateElem.closest(".row")
-    // console.log(currentWeek)
     while (!endReached) {
       while (currentDateElem) {
         if (currentDateElem === calendarDates[1].domElem) {
@@ -237,8 +234,6 @@ function refreshDisplays() {
       currentRow = currentRow.nextSibling;
       currentDateElem = currentRow.querySelector("li");
       console.log(currentDateElem)
-      // get monday of next week
-      // endReached = true;
     }
   }
   
@@ -246,7 +241,6 @@ function refreshDisplays() {
 
 function removeChildren(elem) {
   for (let child of elem.children) {
-    // console.log(child);
     elem.removeChild(child)
   }
   return elem
@@ -283,15 +277,6 @@ const handleDayClick = (e) => {
 
     e.target.classList.add("highlight", "selected")
     refreshDisplays()
-    // let message = `Date clicked: ${clickedDate.toDateString()}.`
-    // if (dayDistance < 0) {
-    //   message += ` ${Math.abs(dayDistance)} day${dayDistance + 1 ? "s" : ""} ago.`
-    // } else if (dayDistance > 0) {
-    //   message += ` ${dayDistance} day${dayDistance - 1 ? "s" : ""} from now.`
-    // } else {
-    //   message += " It's today."
-    // }
-    // console.log(message)
   }
 }
 
@@ -300,7 +285,6 @@ const handleChangeTheme = (e) => {
 }
 const handleHideSidebar = (e) => {
   if (e.target.id === "button-hide-sidebar-left") {
-    // alert("Hide sidebar left under development.")
     e.target.closest("aside").classList.add("hidden")
   } else if (e.target.id === "button-hide-sidebar-right") {
     alert("Hide sidebar right under development.")
@@ -339,10 +323,3 @@ for (let i = -5; i <= 30; i++) {
 }
 
 document.querySelector("aside").classList.add("hidden")
-
-// for (let i = -1; i < 4; i++) {
-//   const week = document.querySelector(`[data-week="${i}"]`);
-// 	for (let elem of week.querySelectorAll("li")) {
-// 		elem.classList.add("highlight")
-// 	}
-// }
