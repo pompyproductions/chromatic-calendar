@@ -175,7 +175,7 @@ function createCalendarDateDisplay(calendarDate) {
   const title = document.createElement("h2");
   title.textContent = calendarDate.toString();
   const closeButton = document.createElement("button");
-  closeButton.classList.add("flat");
+  closeButton.classList.add("flat", "color-accent");
   closeButton.textContent = "[Clear]";
   closeButton.addEventListener("click", handleClearSelection);
   const paragraph = document.createElement("p");
@@ -196,8 +196,8 @@ function createCalendarDateDisplay(calendarDate) {
 function refreshDisplays() {
   const container = document.getElementById("sidebar-right");
   container.innerHTML = ""
+  // picked dates
   for (let i = 0; i < calendarDates.length; i++) {
-    // console.log(calendarDates[i])
     container.append(createCalendarDateDisplay(calendarDates[i]));
     calendarDates[i].domElem.classList.remove("start", "end");
     if (i === 0) {
@@ -232,6 +232,7 @@ function refreshDisplays() {
     // update info section
     const distance = calendarDates[1].distanceFromToday - calendarDates[0].distanceFromToday + 1;
     const infoElem = document.createElement("section");
+    const infoList = document.createElement("dl");
     const dayCount = countDays();
     const weekDays = dayCount.reduce((prev, curr, ind) => {
       if (ind < 5) {
@@ -239,17 +240,19 @@ function refreshDisplays() {
       } return prev
     })
 
-    const infoContent = [
-      `Days selected: ${distance}.`,
-      `(${weekDays} weekdays.)`
-    ]
-
-    for (let line of infoContent) {
-      const elem = document.createElement("p");
-      elem.textContent = line;
-      infoElem.append(elem);
+    const infoContent = {
+      "Days selected:": distance,
+      "Weekdays:": weekDays
     }
-    container.append(infoElem);
+
+    for (const [key, value] of Object.entries(infoContent)) {
+      const keyElem = document.createElement("dt");
+      keyElem.textContent = key;
+      const valueElem = document.createElement("dd");
+      valueElem.textContent = value;
+      infoList.append(keyElem, valueElem);
+    }
+    container.append(infoList);
   }
 }
 

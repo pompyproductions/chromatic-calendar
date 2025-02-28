@@ -25,6 +25,12 @@ body.dark {
   --highlight-weekend: rgb(55, 128, 111);
 }
 
+/* this is the broad definition,
+override it below (e.g. in button.color-accent for bg) */
+.color-accent {
+  color: var(--even-weekday);
+}
+
 /* --- */
 /* general */
 
@@ -229,10 +235,25 @@ button.flat:active {
   transform: translateY(0px);
 }
 
-section:nth-of-type(3) {
-  border-top: var(--fg) 1px solid;
+/* --- */
+/* data display */
+
+dl {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 1em;
+  row-gap: 0.5em;
+  border-top: var(--odd-weekend) 1px dotted;
   padding-top: 1em;
 }
+dl * {
+  font-size: .9em;
+  white-space: nowrap;
+}
+
+
+/* --- */
+/* media queries */
 
 @media screen and (max-width: 900px) {
   body {
