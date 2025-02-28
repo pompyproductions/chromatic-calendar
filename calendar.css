@@ -81,6 +81,41 @@ main {
   text-align: center;
 }
 
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-couple {
+  display: flex;
+  /* gap: 1rem; */
+}
+
+.form-couple input {
+  background: none;
+  width: 2rem;
+  border: none;
+  border-bottom: 1px solid var(--odd-weekend);
+  /* border: 1px solid var(--odd-weekend); */
+  text-align: center;
+}
+.form-couple input:focus {
+  outline: none;
+}
+.form-couple button {
+  padding: 0.2em 1em;
+  font-size: 0.9em;
+}
+
 /* --- */
 /* calendar colors */
 

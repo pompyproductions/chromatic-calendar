@@ -359,11 +359,11 @@ document.getElementById("sidebar-left").addEventListener("click", handleShowSide
 // setup
 
 const today = new Date();
-for (let i = -5; i <= 30; i++) {
+for (let i = 10; i >= -4; i--) {
   const day = new Date(today);
   day.setDate(day.getDate() + i * 7);
   const row = createRow(new Week(day), i);
-  weeksContainer.append(row)
+  weeksContainer.insertBefore(row, weeksContainer.querySelector(".form-couple").nextSibling)
 }
 
 document.querySelector("aside").classList.add("hidden")
