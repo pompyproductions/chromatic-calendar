@@ -189,7 +189,6 @@ function createCalendarDateDisplay(calendarDate) {
   }
   paragraph.textContent = message
 
-
   container.append(closeButton, title, paragraph);
   return container
 }
@@ -198,7 +197,7 @@ function refreshDisplays() {
   const container = document.getElementById("sidebar-right");
   container.innerHTML = ""
   for (let i = 0; i < calendarDates.length; i++) {
-    console.log(calendarDates[i])
+    // console.log(calendarDates[i])
     container.append(createCalendarDateDisplay(calendarDates[i]));
     calendarDates[i].domElem.classList.remove("start", "end");
     if (i === 0) {
@@ -210,17 +209,12 @@ function refreshDisplays() {
   }
 
   if (calendarDates.length === 2) {
-    const distance = calendarDates[1].distanceFromToday - calendarDates[0].distanceFromToday + 1;
-    const comparison = document.createElement("section");
-    const comparisonText = document.createElement("p");
-    comparisonText.textContent = `Days selected: ${distance}`;
-    comparison.append(comparisonText);
-    container.append(comparison);
-    
+    // highlight elements FIRST
+    // (countDays uses ".highlight" query)
+    let endReached = false;
+    let currentDateElem = calendarDates[0].domElem.nextSibling;
+    let currentRow = currentDateElem.closest(".row");
 
-    let endReached = false
-    let currentDateElem = calendarDates[0].domElem.nextSibling
-    let currentRow = currentDateElem.closest(".row")
     while (!endReached) {
       while (currentDateElem) {
         if (currentDateElem === calendarDates[1].domElem) {
@@ -233,11 +227,34 @@ function refreshDisplays() {
       }
       currentRow = currentRow.nextSibling;
       currentDateElem = currentRow.querySelector("li");
-      console.log(currentDateElem)
     }
+
+    // update info section
+    const distance = calendarDates[1].distanceFromToday - calendarDates[0].distanceFromToday + 1;
+    const infoElem = document.createElement("section");
+    const dayCount = countDays();
+    const weekDays = dayCount.reduce((prev, curr, ind) => {
+      if (ind < 5) {
+        return prev + curr
+      } return prev
+    })
+
+    const infoContent = [
+      `Days selected: ${distance}.`,
+      `(${weekDays} weekdays.)`
+    ]
+
+    for (let line of infoContent) {
+      const elem = document.createElement("p");
+      elem.textContent = line;
+      infoElem.append(elem);
+    }
+    container.append(infoElem);
   }
-  
 }
+
+// ---
+// DOM helpers
 
 function removeChildren(elem) {
   for (let child of elem.children) {
@@ -246,18 +263,42 @@ function removeChildren(elem) {
   return elem
 }
 
+function getSiblingIndex(elem) {
+  // can be made faster with nextSibling and previousSibling checks,
+  // like getWeekIndex (if needed)
+  return [...elem.closest(".week").children].indexOf(e.target)
+}
+
+function getWeekIndex(elem) {
+  let count = 0
+  while (elem.nextSibling) {
+    count++
+    elem = elem.nextSibling
+  }
+  return 6 - count
+}
+
+function countDays() {
+  const result = [0, 0, 0, 0, 0, 0, 0]
+  const dateElems = document.querySelectorAll(".highlight")
+  for (let elem of dateElems) {
+    result[getWeekIndex(elem)]++;
+  }
+  return result
+}
+
 // ---
 // event handlers
 
 const handleDayClick = (e) => {
   if (e.target.matches(".row li")) {
     if (calendarDates.some((value) => value.domElem === e.target)) {
-      console.log("it exists!");
+      // console.log("it exists!");
       return
     }
 
     if (calendarDates.length === 2) return;
-    const day = [...e.target.closest(".week").children].indexOf(e.target);
+    const day = getWeekIndex(e.target);
     const weekDistance = e.target.closest(".row").getAttribute("data-week");
 
     const today = new Date();
