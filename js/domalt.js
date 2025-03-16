@@ -56,7 +56,12 @@ function newElem(obj) {
         elem.id = val;
         break;
       case "class":
+      case "classString":
         elem.classList.add(...val.split(" "));
+        break;
+      case "classList":
+      case "classArray":
+        elem.classList.add(...val.filter(item => item.length));
         break;
       case "attributes":
         for (let attr of val) {
@@ -114,9 +119,7 @@ function newElemList(content, isOrdered = false) {
       listElems.push({ tag: "li", content: item });
     }
   }
-  // if (Array.isArray(obj.children)) {
-  //   obj.children.push(...)
-  // }
+
   return newElem({
     tag: isOrdered ? "ol" : "ul",
     children: listElems
@@ -138,13 +141,7 @@ function newElemNav(links, isOrdered = false) {
       ],
     });
   }
-  // for (let childNode of obj) {
-  //   if (childNode instanceof HTMLElement) {
-  //     children.push(childNode)
-  //   } else {
-  //     children.push(newElem(childNode))
-  //   }
-  // }
+
   return newElem({
     tag: "nav",
     children: [

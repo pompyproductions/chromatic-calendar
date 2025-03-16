@@ -1,7 +1,8 @@
-const weeksContainer = document.getElementById("weeks-container")
-const calendarDates = []
-const highlightedDates = []
+import domalt from "./domalt.js"
 
+const weeksContainer = document.getElementById("weeks-container");
+const calendarDates = [];
+const highlightedDates = [];
 
 class CalendarDate {
   constructor(date, domElem, distanceFromToday) {
@@ -96,74 +97,63 @@ function monthToStr(monthIndex) {
   ][monthIndex]
 }
 
+// ---
+// DOM Elements
+
 function createRow(week, distance) {
   // creates:
   // div.row > ol.week > li.odd|even.today.weekend|weekday*7
   //         > p.right.odd|even
   //         > p.left.odd|even
-
-  const rowElem = document.createElement("div");
-  rowElem.classList.add("row");
-  rowElem.setAttribute("data-week", distance);
   
-  const weekElem = document.createElement("ol");
-  weekElem.classList.add("week");
-  rowElem.append(weekElem);
-
-  // for (let day of week.days) {
+  const rowElem = domalt.newElem({
+    class: "row",
+    attributes: [["data-week", distance]],
+  });
+  const weekElem = domalt.newElem({
+    tag: "ol",
+    class: "week"
+  });
+  
   for (let i = 0; i < 7; i++) {
-    const dayElem = document.createElement("li");
     const day = week.days[i]
     const month = day.getMonth()
-    if (month % 2) {
-      dayElem.classList.add("even"); // because jan is 0
-    } else {
-      dayElem.classList.add("odd");
-    }
-    if (i > 4) {
-      dayElem.classList.add("weekend");
-    }
-    dayElem.textContent = day.getDate().toString().padStart(2, "0");
-
-    if (!distance) {
-      if (day.toDateString() == new Date().toDateString()) {
-        dayElem.classList.add("today")
-      }
-    }
+    const dayElem = domalt.newElem({
+      tag: "li",
+      classList: [
+        month % 2 ? "even" : "odd",
+        i > 4 ? "weekend" : "",
+        day.toDateString() == new Date().toDateString() ? "today" : ""
+      ],
+      content: day.getDate().toString().padStart(2, "0")
+    })
     weekElem.append(dayElem);
   }
+  rowElem.append(weekElem);
+  
   if (week.isLastWeek && week.isFirstWeek) {
-    const leftElem = document.createElement("p");
-    leftElem.textContent = monthToStr(week.months[0])
-    if (week.months[0] % 2) {
-      leftElem.classList.add("even");
-    } else {
-      leftElem.classList.add("odd");
-    }
-    leftElem.classList.add("left");
-    
-    const rightElem = document.createElement("p");
-    rightElem.textContent = monthToStr(week.months[1])
-    if (week.months[1] % 2) {
-      rightElem.classList.add("even");
-    } else {
-      rightElem.classList.add("odd");
-    }
-    rightElem.classList.add("right"); 
-    rowElem.append(leftElem);
-    rowElem.append(rightElem);
+    rowElem.append(domalt.newElem({
+      tag: "p",
+      content: monthToStr(week.months[0]),
+      class: `left ${week.months[0] % 2 ? "even" : "odd"}`
+    }));
+    rowElem.append(domalt.newElem({
+      tag: "p",
+      content: monthToStr(week.months[1]),
+      class: `right ${week.months[1] % 2 ? "even" : "odd"}`
+    }));
   } else if (week.isLastWeek) {
-    const rightElem = document.createElement("p");
-    rightElem.textContent = monthToStr(week.months[0])
-    rightElem.classList.add("right")
-    rightElem.classList.add(week.months[0] % 2 ? "even" : "odd");
-    rowElem.append(rightElem)
+    rowElem.append(domalt.newElem({
+      tag: "p",
+      content: monthToStr(week.months[0]),
+      class: `right ${week.months[0] % 2 ? "even" : "odd"}`
+    }))
   } else if (week.isFirstWeek) {
-    const leftElem = document.createElement("p");
-    leftElem.textContent = monthToStr(week.months[0])
-    leftElem.classList.add("left")
-    leftElem.classList.add(week.months[0] % 2 ? "even" : "odd");
-    rowElem.append(leftElem); 
+    rowElem.append(domalt.newElem({
+      tag: "p",
+      content: monthToStr(week.months[0]),
+      class: `right ${week.months[0] % 2 ? "even" : "odd"}`
+    }))
   }
   return rowElem;
 }
