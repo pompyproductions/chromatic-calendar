@@ -66,7 +66,29 @@ body {
   height: 100vh;
   font-family: Azeret Mono;
   grid-template-areas: "header" "main" "footer";
+  grid-template-rows: min-content 1fr min-content;
+  align-items: center;
   font-size: 0.8rem;
+}
+
+header {
+  border-bottom: 1px dashed var(--even-weekend);
+  padding: 1em;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed var(--even-weekend);
+  padding: 1em;
+}
+footer h1 {
+  font-size: 1.2em;
+}
+footer ul {
+  display: flex;
+  gap: 1em;
+  align-items: center;
 }
 
 aside {
