@@ -25,11 +25,10 @@
       font-size: .8em;
     }
   }
-  @include break-at("mobile-m") {
+  @include break-at("mobile-l") {
     & > .left,
     & > .right {
-      display: block;
-      font-size: .8em;
+      font-size: .9em;
     }
   }
 }

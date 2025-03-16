@@ -18,6 +18,10 @@ body {
   align-items: center;
   
   font-size: 0.8rem; 
+
+  @include break-at("tablet-s") {
+    font-size: .9rem;
+  }
 }
 
 header {

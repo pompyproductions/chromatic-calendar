@@ -59,16 +59,25 @@ override it below (e.g. in button.color-accent for bg) */
   color: var(--even-weekday);
 }
 
+:root {
+  --doc-height: 100vh;
+}
+
 body {
   display: grid;
   background-color: var(--bg);
   color: var(--fg);
-  height: 100vh;
+  height: var(--doc-height);
   font-family: Azeret Mono;
   grid-template-areas: "header" "main" "footer";
   grid-template-rows: min-content 1fr min-content;
   align-items: center;
   font-size: 0.8rem;
+}
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 
 header {
@@ -128,10 +137,9 @@ main {
     font-size: 0.8em;
   }
 }
-@media only screen and (min-width: 360px) {
+@media only screen and (min-width: 420px) {
   .row > .left, .row > .right {
-    display: block;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 }
 
