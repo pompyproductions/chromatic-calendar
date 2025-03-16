@@ -9,10 +9,9 @@ html {
   padding: 0;
   font-family: inherit;
   color: inherit;
-}
-
-*::before, *::after {
-  box-sizing: inherit;
+  &::before, &::after {
+    box-sizing: inherit;
+  }
 }
 
 table {
@@ -22,10 +21,10 @@ table {
 
 li {
   list-style: none;
-}
-li ul, li ol {
-  margin: 0;
-  padding: 0;
+  ul, ol {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 img, video {

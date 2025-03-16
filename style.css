@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap");
+/* CSS RESET */
+html {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+}
+*::before, *::after {
+  box-sizing: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+li {
+  list-style: none;
+}
+li ul, li ol {
+  margin: 0;
+  padding: 0;
+}
+
+img, video {
+  max-width: 100%;
+}
+
+body {
+  --fg: hsl(0, 0%, 0%);
+  --bg: hsl(0, 0%, 100%);
+  --even-weekday: hsl(180, 40%, 45%);
+  --even-weekend: hsl(180, 45%, 65%);
+  --odd-weekday: hsl(0, 0%, 15%);
+  --odd-weekend: hsl(0, 0%, 60%);
+  --highlight-weekday: hsl(0, 90%, 45%);
+  --highlight-weekend: hsl(0, 70%, 70%);
+}
+
+body.dark {
+  --bg: rgb(12, 12, 12);
+  --fg: rgb(242, 242, 242);
+  --even-weekday: rgb(237, 91, 91);
+  --even-weekend: rgb(105, 32, 32);
+  --odd-weekday: rgb(245, 245, 245);
+  --odd-weekend: rgb(180, 180, 180);
+  --highlight-weekday: rgb(72, 214, 181);
+  --highlight-weekend: rgb(55, 128, 111);
+}
+
+/* this is the broad definition,
+override it below (e.g. in button.color-accent for bg) */
+.color-accent {
+  color: var(--even-weekday);
+}
+
+/* --- */
+/* general */
+body {
+  display: flex;
+  background-color: var(--bg);
+  color: var(--fg);
+  height: 100vh;
+  font-family: Azeret Mono;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  padding: 2em;
+  overflow: scroll;
+}
+
+/* --- */
+/* calendar layout */
+.row {
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-areas: "left week right";
+  gap: 2em;
+}
+
+.row > .left {
+  grid-area: left;
+  text-align: end;
+}
+
+.row > .right {
+  grid-area: right;
+}
+
+.row > .week {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  grid-area: week;
+}
+
+.row > .week > li {
+  text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.form-couple {
+  display: flex;
+  /* gap: 1rem; */
+}
+
+.form-couple input {
+  background: none;
+  width: 2rem;
+  border: none;
+  border-bottom: 1px solid var(--odd-weekend);
+  /* border: 1px solid var(--odd-weekend); */
+  text-align: center;
+}
+
+.form-couple input:focus {
+  outline: none;
+}
+
+.form-couple button {
+  padding: 0.2em 1em;
+  font-size: 0.9em;
+}
+
+/* --- */
+/* calendar colors */
+.row .odd {
+  color: var(--odd-weekday);
+}
+
+.row .odd.weekend,
+.row > .odd.right {
+  color: var(--odd-weekend);
+}
+
+.row .even {
+  color: var(--even-weekday);
+}
+
+.row .even.weekend,
+.row > .even.right {
+  color: var(--even-weekend);
+}
+
+.row .highlight,
+.row > .highlight.right {
+  color: var(--highlight-weekday);
+}
+
+.row .highlight.weekend,
+.row > .highlight.right {
+  color: var(--highlight-weekend);
+}
+
+/* --- */
+/* calendar outlines */
+.row .today, .row .selected {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.row .today {
+  border-radius: 50%;
+}
+
+.row li:hover {
+  outline: 1px dashed currentColor;
+  outline-offset: 4px;
+  border-radius: 1em;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* --- */
+/* calendar selection */
+.week .highlight {
+  position: relative;
+}
+
+.week .highlight::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  left: -8px;
+  top: -3px;
+  bottom: -3px;
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+}
+
+.week .highlight:first-of-type:after {
+  border-left: 1px dashed currentColor;
+}
+
+.week .highlight:last-of-type:after {
+  border-right: 1px dashed currentColor;
+}
+
+.week .highlight.selected {
+  outline: none;
+  /* border-right: 1px dashed currentColor; */
+}
+
+.week .highlight.selected.start::after {
+  border-left: 1px solid currentColor;
+}
+
+.week .highlight.selected.end::after {
+  border-right: 1px solid currentColor;
+}
+
+/* --- */
+/* sidebar */
+aside.hidden {
+  cursor: pointer;
+}
+
+aside.hidden > * {
+  display: none !important;
+}
+
+#sidebar-left {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(205, 53, 53);
+  color: var(--odd-weekday);
+  padding: 2em;
+  gap: 1em;
+}
+
+#sidebar-right {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.vsep {
+  flex-grow: 1;
+}
+
+button {
+  border: 1px solid var(--odd-weekday);
+  background: none;
+  padding: 0.5em 1em;
+  transition: transform 0.1s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--even-weekend) 0px 2px;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: rgb(235, 69, 69);
+  transform: translateY(-1px);
+  box-shadow: var(--even-weekend) 0px 1px;
+}
+
+button.flat {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  text-align: start;
+}
+
+button.flat:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  transform: translateY(0);
+}
+
+button.flat:active {
+  transform: translateY(0px);
+}
+
+/* --- */
+/* data display */
+dl {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 1em;
+  row-gap: 0.5em;
+  border-top: var(--odd-weekend) 1px dotted;
+  padding-top: 1em;
+}
+
+dl * {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+/* --- */
+/* media queries */
+@media screen and (max-width: 900px) {
+  body {
+    font-size: 0.8rem;
+  }
+  aside {
+    display: none !important;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

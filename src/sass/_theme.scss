@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  --fg: hsl(0, 0%, 0%);
+  --bg: hsl(0, 0%, 100%);
+  --even-weekday: hsl(180, 40%, 45%);
+  --even-weekend: hsl(180, 45%, 65%);
+  --odd-weekday: hsl(0, 0%, 15%);
+  --odd-weekend: hsl(0, 0%, 60%);
+  --highlight-weekday: hsl(0, 90%, 45%);
+  --highlight-weekend: hsl(0, 70%, 70%);
+}
+
+body.dark {
+  --bg: rgb(12, 12, 12);
+  --fg: rgb(242, 242, 242);
+  --even-weekday: rgb(237, 91, 91);
+  --even-weekend: rgb(105, 32, 32);
+  --odd-weekday: rgb(245, 245, 245);
+  --odd-weekend: rgb(180, 180, 180);
+  --highlight-weekday: rgb(72, 214, 181);
+  --highlight-weekend: rgb(55, 128, 111);
+}
+
+/* this is the broad definition,
+override it below (e.g. in button.color-accent for bg) */
+.color-accent {
+  color: var(--even-weekday);
+}

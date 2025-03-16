@@ -13,9 +13,15 @@
 
 ## Theme
 
-- [ ] Install SASS.
+- [x] Install SASS.
 - [ ] Refine light theme.
 - [ ] Design mobile version ("info" sidebar below, "settings" as modal?).
+
+<details>
+  <summary><h3>Completed</h3></summary>
+  
+  - [x] (2025-03-16) _Install SASS._  
+</details>
 
 
 ## Calendar

@@ -26,3 +26,15 @@ Chromatic Calendar is born out of this simple necessity, intended as a tool to b
 - Easily accessible (online, free, no account needed),
 - Easy on the eyes.
 
+
+## Setup (for development)
+
+Sass is the only dependency.  
+If you don't have it, install it: 
+
+- For Windows, open up a terminal, run `choco install sass`.
+- For Mac, open up a terminal, run `brew install sass/sass/sass`.
+
+Once you have Sass installed, run `sass src\sass\style.scss style.css --watch` & spin up a live server.
+
+Alternatively you can install node & set up scripts and such.
