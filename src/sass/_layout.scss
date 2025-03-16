@@ -1,10 +1,16 @@
 @use "mixins" as *;
 
+:root {
+  --doc-height: 100vh; // fallback
+}
+
 body {
   display: grid;
   background-color: var(--bg);
   color: var(--fg);
-  height: 100vh;
+  
+  height: var(--doc-height);
+
   font-family: Azeret Mono;
   grid-template-areas: "header" "main" "footer";
   grid-template-rows: min-content 1fr min-content;
