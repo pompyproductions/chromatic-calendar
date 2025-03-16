@@ -13,9 +13,9 @@
 
 ## Theme
 
-- [x] Install SASS.
+- [ ] Add "resize.js" module.
 - [ ] Refine light theme.
-- [ ] Design mobile version ("info" sidebar below, "settings" as modal?).
+- [ ] Design [mobile version.](#notes)
 
 <details>
   <summary><h3>Completed</h3></summary>
@@ -28,6 +28,7 @@
 
 - [ ] Add "load x more weeks" buttons on top and bottom.
 - [ ] Add week number of the year to one side, and week number of the month to the other. (e.g. right side goes March 2 3 4 5 April, and left side goes February 19 20 21 22 March)
+- [ ] Display only week numbers when it's too small.
 
 
 ## Info sidebar
@@ -64,3 +65,20 @@ weekendDays = week & 0b0000011
 ```
 
 - Set a custom "business days" bit mask, that the user can change, and count how many.
+
+### Mobile view
+
+3 parts: header, main, footer.
+
+Header:  
+- Very basic info about selection.
+- Show more details as a modal when clicked.
+
+Main:  
+- In the smallest size (width < 360px), only display the dates, and the week number.
+- Next breakpoint (360px < width < 420px), display the months too, but abbreviated.
+- From 420px on, display the full month.
+
+Footer:  
+- Navigation (settings button, about button, etc.)
+- Open related modals when clicked.

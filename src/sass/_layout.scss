@@ -1,0 +1,28 @@
+@use "mixins" as *;
+
+body {
+  display: grid;
+  background-color: var(--bg);
+  color: var(--fg);
+  height: 100vh;
+  font-family: Azeret Mono;
+  grid-template-areas: "header" "main" "footer";
+  // justify-content: center;
+  // align-items: center;
+  
+  font-size: 0.8rem; 
+}
+
+aside {
+  display: none !important;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  padding: 2em;
+  overflow: scroll;
+  grid-area: main;
+}

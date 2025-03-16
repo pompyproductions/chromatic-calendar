@@ -1,23 +1,4 @@
-/* --- */
-/* general */
-
-body {
-  display: flex;
-  background-color: var(--bg);
-  color: var(--fg);
-  height: 100vh;
-  font-family: Azeret Mono;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
-  padding: 2em;
-  overflow: scroll;
-}
-
+@use "mixins" as *;
 /* --- */
 /* calendar layout */
 
@@ -26,12 +7,34 @@ main {
   grid-template-columns: 1fr min-content 1fr;
   grid-template-areas: "left week right";
   gap: 2em;
+
+  & > .left {
+    grid-area: left;
+    text-align: end;
+    display: none;
+  }
+  & > .right {
+    grid-area: right;
+    display: none;
+  }
+
+  @include break-at("mobile-m") {
+    & > .left,
+    & > .right {
+      display: block;
+      font-size: .8em;
+    }
+  }
+  @include break-at("mobile-m") {
+    & > .left,
+    & > .right {
+      display: block;
+      font-size: .8em;
+    }
+  }
 }
 
-.row > .left {
-  grid-area: left;
-  text-align: end;
-}
+
 
 .row > .right {
   grid-area: right
@@ -252,17 +255,4 @@ dl {
 dl * {
   font-size: .9em;
   white-space: nowrap;
-}
-
-
-/* --- */
-/* media queries */
-
-@media screen and (max-width: 900px) {
-  body {
-    font-size: 0.8rem;
-  }
-  aside {
-    display: none !important;
-  }
 }

@@ -1,0 +1,33 @@
+// TL:DR;
+// aim for beauty in "mobile-m", "tablet-m", "pc-l"
+// the others are edge cases that must be guaranteed to work
+
+$breakpoints: (
+    // design for 320 and above as basepoint
+    "mobile-m": 360px, // modern phones start more or less here.
+    "mobile-l": 420px, // large modern phones, phablets
+
+    "tablet-s": 600px, // older tablets in portrait
+    "tablet-m": 720px, // actually 760 but break here
+    // treat larger tablets (900px...) same as "tablet-m"
+
+    "pc-s": 1024px, // landscape modern tablets will creep here
+    "pc-m": 1280px, // this is laptop territory
+    "pc-l": 1440px, // generic ballpark: make others work, but make this shine!
+    "pc-xl": 1920px // maximized on a big monitor
+);
+
+@mixin break-at($size) {
+    @if map-has-key($breakpoints, $size) {
+        @media only screen and (min-width: map-get($breakpoints, $size)) {
+            @content;
+        }
+    }
+}
+
+@mixin disable-selection {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}

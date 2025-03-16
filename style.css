@@ -59,14 +59,18 @@ override it below (e.g. in button.color-accent for bg) */
   color: var(--even-weekday);
 }
 
-/* --- */
-/* general */
 body {
-  display: flex;
+  display: grid;
   background-color: var(--bg);
   color: var(--fg);
   height: 100vh;
   font-family: Azeret Mono;
+  grid-template-areas: "header" "main" "footer";
+  font-size: 0.8rem;
+}
+
+aside {
+  display: none !important;
 }
 
 main {
@@ -76,6 +80,7 @@ main {
   align-items: center;
   padding: 2em;
   overflow: scroll;
+  grid-area: main;
 }
 
 /* --- */
@@ -86,10 +91,26 @@ main {
   grid-template-areas: "left week right";
   gap: 2em;
 }
-
 .row > .left {
   grid-area: left;
   text-align: end;
+  display: none;
+}
+.row > .right {
+  grid-area: right;
+  display: none;
+}
+@media only screen and (min-width: 360px) {
+  .row > .left, .row > .right {
+    display: block;
+    font-size: 0.8em;
+  }
+}
+@media only screen and (min-width: 360px) {
+  .row > .left, .row > .right {
+    display: block;
+    font-size: 0.8em;
+  }
 }
 
 .row > .right {
@@ -310,17 +331,6 @@ dl {
 dl * {
   font-size: 0.9em;
   white-space: nowrap;
-}
-
-/* --- */
-/* media queries */
-@media screen and (max-width: 900px) {
-  body {
-    font-size: 0.8rem;
-  }
-  aside {
-    display: none !important;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */
