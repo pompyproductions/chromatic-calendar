@@ -13,13 +13,13 @@
 
 ## Theme
 
-- [ ] Add "resize.js" module.
 - [ ] Refine light theme.
 - [ ] Design [mobile version.](#notes)
 
 <details>
   <summary><h3>Completed</h3></summary>
   
+  - [x] (2025-03-16) _Add "resize.js" module._
   - [x] (2025-03-16) _Install SASS._  
 </details>
 
