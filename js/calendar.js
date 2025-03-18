@@ -178,7 +178,7 @@ function createCalendarDateDisplay(calendarDate) {
                 content: "[Clear]",
                 listeners: { "click": handleClearSelection }
             }),
-            domalt.newElem(["h2", calendarDate.toString()],
+            domalt.newElem(["h2", calendarDate.toString()]),
             domalt.newElem(["p", message])
         ]
     })
@@ -222,28 +222,16 @@ function refreshDisplays() {
         
         // update info section
         const distance = calendarDates[1].distanceFromToday - calendarDates[0].distanceFromToday + 1;
-        const infoElem = document.createElement("section");
-        const infoList = document.createElement("dl");
-        const dayCount = countDays();
-        const weekDays = dayCount.reduce((prev, curr, ind) => {
+        const weekDays = countDays().reduce((prev, curr, ind) => {
             if (ind < 5) {
                 return prev + curr
             } return prev
         })
-        
-        const infoContent = {
+
+        container.append(domalt.newElemDl({
             "Days selected:": distance,
             "Weekdays:": weekDays
-        }
-        
-        for (const [key, value] of Object.entries(infoContent)) {
-            const keyElem = document.createElement("dt");
-            keyElem.textContent = key;
-            const valueElem = document.createElement("dd");
-            valueElem.textContent = value;
-            infoList.append(keyElem, valueElem);
-        }
-        container.append(infoList);
+        }));
     }
 }
 
