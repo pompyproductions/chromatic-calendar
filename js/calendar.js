@@ -159,16 +159,6 @@ function createRow(week, distance) {
 }
 
 function createCalendarDateDisplay(calendarDate) {
-    const container = document.createElement("section");
-    container.classList.add("picked-date", "container");
-    
-    const title = document.createElement("h2");
-    title.textContent = calendarDate.toString();
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("flat", "color-accent");
-    closeButton.textContent = "[Clear]";
-    closeButton.addEventListener("click", handleClearSelection);
-    const paragraph = document.createElement("p");
     let message = "";
     if (calendarDate.distanceFromToday < 0) {
         message = `${Math.abs(calendarDate.distanceFromToday)} day${calendarDate.distanceFromToday + 1 ? "s" : ""} ago.`
@@ -177,10 +167,21 @@ function createCalendarDateDisplay(calendarDate) {
     } else {
         message = "Today."
     }
-    paragraph.textContent = message
-    
-    container.append(closeButton, title, paragraph);
-    return container
+
+    return domalt.newElem({
+        tag: "section",
+        class: "picked-date container",
+        children: [
+            domalt.newElem({
+                tag: "button",
+                class: "flat color-accent",
+                content: "[Clear]",
+                listeners: { "click": handleClearSelection }
+            }),
+            domalt.newElem(["h2", calendarDate.toString()],
+            domalt.newElem(["p", message])
+        ]
+    })
 }
 
 function refreshDisplays() {
