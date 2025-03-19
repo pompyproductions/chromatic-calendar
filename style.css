@@ -122,6 +122,11 @@ main {
   grid-template-areas: "left week right";
   gap: 2em;
 }
+.row > p.left, .row > p.right {
+  text-overflow: ".";
+  max-width: 4ch;
+  overflow: clip;
+}
 .row > .left {
   grid-area: left;
   text-align: end;
@@ -132,14 +137,15 @@ main {
   display: none;
 }
 @media only screen and (min-width: 360px) {
-  .row > .left, .row > .right {
+  .row > p.left, .row > p.right {
     display: block;
     font-size: 0.8em;
   }
 }
 @media only screen and (min-width: 420px) {
-  .row > .left, .row > .right {
+  .row > p.left, .row > p.right {
     font-size: 0.9em;
+    max-width: unset;
   }
 }
 

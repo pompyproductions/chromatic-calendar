@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // TL:DR;
 // aim for beauty in "mobile-m", "tablet-m", "pc-l"
 // the others are edge cases that must be guaranteed to work
@@ -18,8 +20,8 @@ $breakpoints: (
 );
 
 @mixin break-at($size) {
-    @if map-has-key($breakpoints, $size) {
-        @media only screen and (min-width: map-get($breakpoints, $size)) {
+    @if map.has-key($breakpoints, $size) {
+        @media only screen and (min-width: map.get($breakpoints, $size)) {
             @content;
         }
     }
