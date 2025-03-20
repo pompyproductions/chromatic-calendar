@@ -1,4 +1,5 @@
-import domalt from "./domalt.js"
+import domalt from "./domalt.js";
+import { monthToStr } from "./calendar-dates.js";
 
 const weeksContainer = document.getElementById("weeks-container");
 const calendarDates = [];
@@ -78,23 +79,6 @@ function getWeek(date) {
         week.push(day)
     }
     return week
-}
-
-function monthToStr(monthIndex) {
-    return [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ][monthIndex]
 }
 
 // ---
